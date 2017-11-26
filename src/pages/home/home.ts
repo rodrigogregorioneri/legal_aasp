@@ -24,7 +24,7 @@ public base64Image: string;
       // imageData is a base64 encoded string
         this.base64Image = "data:image/jpeg;base64," + imageData;
         this.storage.set('foto', this.base64Image);
-        this.storage.get('myKey').then((val) => {
+        this.storage.get('foto').then((val) => {
           console.log(val);
         })
 
