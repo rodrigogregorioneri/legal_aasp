@@ -1,15 +1,17 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import {Camera} from 'ionic-native';
+import { Storage } from '@ionic/storage';
 
 @Component({
   selector: 'page-home',
-  templateUrl: 'home.html'
+  templateUrl: 'home.html',
+  providers: [ Storage ]
 
 })
 export class HomePage {
 public base64Image: string;
-  constructor(public navCtrl: NavController) {
+  constructor(public navCtrl: NavController, public storage: Storage) {
 
   }
 
@@ -21,9 +23,16 @@ public base64Image: string;
     }).then((imageData) => {
       // imageData is a base64 encoded string
         this.base64Image = "data:image/jpeg;base64," + imageData;
+        this.storage.set('foto', this.base64Image);
+        this.storage.get('myKey').then((val) => {
+          console.log(val);
+        })
+
     }, (err) => {
         console.log(err);
     });
   }
+
+  
 
 }
